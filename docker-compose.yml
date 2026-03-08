@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: teddie-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: teddie
+      POSTGRES_USER: teddie
+      POSTGRES_PASSWORD: teddie
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
