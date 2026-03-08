@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: teddie-backend
+  profiles:
+    active: local
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/teddie}
+    username: ${DB_USERNAME:teddie}
+    password: ${DB_PASSWORD:teddie}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        default_batch_fetch_size: 100
+  flyway:
+    enabled: true
+  task:
+    execution:
+      pool:
+        core-size: 5
+        max-size: 10
+        queue-capacity: 100
+
+server:
+  port: 8080
+
+jwt:
+  secret: ${JWT_SECRET:local-dev-secret-key-must-be-at-least-256-bits-long-padding}
+  expiration: 86400000
+
+claude:
+  api-key: ${CLAUDE_API_KEY:}
+  model: claude-3-5-sonnet-20241022
+  max-tokens: 4096
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    root: INFO
